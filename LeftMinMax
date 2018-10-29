@@ -1,0 +1,39 @@
+#LEFT, MIN, MAX
+
+#How many rentals we had each month
+#LEFT(text, # chars to pull starting at beginning)
+#Be careful with Month, looks like keyword.
+#LEFT is useful if you want just Days, not THAT SECOND/Minute
+SELECT
+	LEFT(r.rental_date, 7) as Months,
+	count(r.rental_id) as Rentals
+FROM
+	rental r
+GROUP BY
+	Months
+ORDER BY
+	Rentals desc
+;
+
+
+
+# First time/Last time movie was rented
+#MIN/MAX
+#of all the times the movie was rented, find
+#MIN or earliest
+#MAX or latest
+SELECT
+	f.title as Film,
+	MIN(LEFT(r.rental_date,10)) as "First Rented",
+	MAX(LEFT(r.rental_date,10)) as "Last Rented"
+FROM
+	rental r,
+	inventory i,
+	film f
+WHERE
+	r.inventory_id = i.inventory_id
+	AND
+	i.film_id = f.film_id
+GROUP BY
+	f.film_id
+;
