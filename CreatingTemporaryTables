@@ -32,3 +32,40 @@ GROUP BY
 ORDER BY
 	TotalRentals
 ;
+
+####################
+#New Example
+
+
+#Find Revenue by Actor
+DROP temporary table if exists RevenuePerFilm;
+CREATE temporary table RevenuePerFilm
+SELECT
+	f.film_id as FilmID,
+	f.rental_rate * COUNT(r.rental_id) as FilmRevenue
+FROM
+ rental r, inventory i,
+ film f
+WHERE
+	r.inventory_id = i.inventory_id
+	AND
+	i.film_id = f.film_id
+GROUP BY
+	FilmID
+;
+#Actor to Film Revenue
+SELECT
+	a.actor_id as ID,
+	CONCAT(a.first_name, " ", a.last_name) as FullName,
+	SUM(rpf.FilmRevenue) as Revenue
+FROM
+	RevenuePerFilm rpf,
+	actor a, film_actor fa
+	
+WHERE
+	a.actor_id = fa.actor_id
+	AND
+	fa.film_id = rpf.FilmID
+GROUP BY
+	ID
+;
