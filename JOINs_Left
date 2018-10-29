@@ -1,0 +1,12 @@
+#LEFT JOIN
+#contains ALL main table data and connected table data
+#where ac.customer_id = rc.customer_id
+#but values of rc.customer_id may contain some nulls
+SELECT
+	ac.customer_id,
+	ac.fav_color,
+	rc.num_purchases
+FROM
+	active_customer ac LEFT JOIN reward_customer rc 
+	  ON ac.customer_id = rc.customer_id
+;
