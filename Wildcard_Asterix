@@ -1,0 +1,13 @@
+#Get phone numbers and cust info of all active users
+DROP temporary table if exists activeUsers;
+CREATE temporary table activeUsers
+SELECT
+	c.*, #returns all columns in table
+	a.phone #whatever items wanted to add.
+FROM
+	customer c 
+	JOIN address a 
+	ON c.address_id = a.address_id
+WHERE
+	c.active = 1
+;
