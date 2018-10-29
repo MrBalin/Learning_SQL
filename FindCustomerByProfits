@@ -1,0 +1,17 @@
+#SUM(); what customer has paid us the most money
+
+#Could easily use 1 instead of p.customer_id in Group by,
+#because it is the 1st in SELECT,
+#Similar to how Order by is uses as well, in this case
+#desc was added, because we want the highest sum at the top.
+
+SELECT
+	p.customer_id, 
+	SUM(p.amount)
+FROM
+	payment p
+GROUP BY
+	1
+ORDER BY
+	2 desc
+;
