@@ -1,0 +1,23 @@
+#what store has brought in most revenue
+#Figured out i can GroupBy/OrderBy using 
+#variables created in SELECT,
+#wonder if it's possible in WHERE somehow.
+SELECT
+	i.store_id as Store,
+	SUM(p.amount) as Revenue
+
+FROM
+	payment p,
+	rental r,
+	inventory i
+
+WHERE
+	p.rental_id = r.rental_id
+	AND
+	r.inventory_id = i.inventory_id
+
+GROUP BY
+	Store
+ORDER BY
+	Revenue desc
+;
