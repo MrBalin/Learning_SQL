@@ -1,0 +1,19 @@
+#users who have rented at least 3 times
+#Comparison Operators (>, <, =, <=, >=, <>, !=)
+#HAVING filters AFTER query completed
+#WHERE filters AS query goes
+SELECT
+	r.customer_id as Customer,
+    CONCAT(c.first_name, " ", c.last_name) as CustomerName,
+	COUNT(r.rental_id) as TotalRentals
+FROM
+	rental r, customer c
+WHERE
+	r.customer_id = c.customer_id
+GROUP BY
+	Customer
+HAVING
+	COUNT(r.rental_id) >= 3
+ORDER BY
+	TotalRentals desc
+;
