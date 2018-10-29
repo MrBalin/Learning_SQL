@@ -1,0 +1,17 @@
+#How many distinct renters per month
+
+#DISTINCT(r.customer_id) and r.customer_id
+#differ because we don't want to count EVERY instance
+
+#ROUND(number, decimal places)
+#rounds item to amount prefered decimal places
+SELECT
+	LEFT(r.rental_date,7) as Months,
+	ROUND(COUNT(r.rental_id)/COUNT(DISTINCT(r.customer_id)),0) as "Average Rentals Per Customer",
+	COUNT( DISTINCT(r.customer_id)) as UniqueCustomers,
+	COUNT(r.rental_id) as TotalRentals
+FROM
+	rental r
+GROUP BY
+	Months
+;
