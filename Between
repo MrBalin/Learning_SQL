@@ -1,0 +1,30 @@
+#How much Revenue has 1 store made w/in PG-13 & R rated films
+#BETWEEN date range
+#I'm getting used to understanding intellisense will NOT
+#tell you the headers of each table, definitely need to
+#know your tables before/while making a query.
+SELECT
+	CONCAT("Location: ", i.store_id) as Location,
+	f.rating as Rating,
+	SUM(p.amount) as Revenue
+FROM
+	payment p, rental r,
+	inventory i,
+	film f
+WHERE
+	p.rental_id = r.rental_id
+	AND
+	r.inventory_id = i.inventory_id
+	AND
+	i.store_id = 1
+	AND
+	i.film_id = f.film_id
+	AND
+	f.rating in ("PG-13", "R")
+	AND
+	r.rental_date BETWEEN "2005-06-08" AND "2005-7-19"
+GROUP BY
+	Rating
+ORDER BY
+	Revenue desc
+;
