@@ -1,0 +1,34 @@
+#Temporary Tables
+#CREATE TEMPORARY TABLE "tableName"
+#useful to add DROP if rerunning, because
+#that table already exists from last time.
+
+#CREATE the table, but not get results
+#Rentals per User
+DROP temporary table if exists RentalsPerCustomer;
+CREATE temporary table RentalsPerCustomer
+SELECT
+	r.customer_id as CustomerID,
+	COUNT(r.rental_id) as TotalRentals,
+	SUM(p.amount) as Revenue
+FROM
+	rental r, payment p
+WHERE
+	r.rental_id = p.rental_id
+GROUP BY
+	CustomerID
+;
+
+#Get results from created table
+#Revenue by Users who rented x# movies
+SELECT
+COUNT(rpc.CustomerID) as TotalCustomers,
+rpc.TotalRentals as TotalRentals,
+SUM(rpc.Revenue) as TotalRevenue
+FROM
+	RentalsPerCustomer rpc
+GROUP BY
+	TotalRentals
+ORDER BY
+	TotalRentals
+;
