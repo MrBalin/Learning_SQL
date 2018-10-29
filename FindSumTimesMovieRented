@@ -1,0 +1,36 @@
+#How many times each movie has been rented out
+#which movie made us the most money
+# revenue = price * qty rented
+
+#SELECT
+#Can use AS to declare name (what also shows up as header)
+#if One word, quotations not neccisary, but can be used
+#definitely if 2+ words.
+#FROM
+#give a shorthand to your tables, so you don't have to
+#spell the whole thing out, but can get confusing
+#WHERE
+#I tried using those names here, but got errors,
+#wish that i could figure out how to use those
+#names i used from Select
+#GroupBy/OrderBy
+#the numbers correlate to the order of SELECT items.
+
+SELECT
+	f.title AS Title, 
+	count(r.rental_id) as "Sum",
+	f.rental_rate as "Rental Price", 
+	count(r.rental_id) * f.rental_rate AS Revenue
+FROM
+	film f, rental r, inventory i
+
+WHERE
+	f.film_id = i.film_id
+	AND
+	i.inventory_id = r.inventory_id
+
+GROUP BY
+	1
+ORDER BY
+	4 desc
+;
