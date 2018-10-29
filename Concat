@@ -1,0 +1,18 @@
+#Every Customer's Last rental date
+#Be careful with CONCAT/other functions
+#They can be specific to certain programs,
+#like MySQL, Oracle, etc.
+SELECT
+	CONCAT(c.first_name, " ", c.last_name) as Name,
+	c.email as Email,
+	MAX(LEFT(p.payment_date, 10)) as "Last Purchase Date"
+FROM
+	payment p,
+	customer c
+WHERE
+	p.customer_id = c.customer_id
+GROUP BY
+	c.customer_id
+ORDER BY
+	3 desc
+;
