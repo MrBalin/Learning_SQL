@@ -1,0 +1,30 @@
+#number of rentals in the comedy, sports, & family
+#I've learned to keep tables on the same line
+#if in relation to each other, in WHERE
+#and try to organize WHERE
+#by last table needing relationships
+#goes first on the next line.
+
+#IN
+#very similar to x = "" OR x = ...,
+#Just abrreviated to use fewer lines.
+SELECT
+	c.name as FilmCategory,
+	COUNT(r.rental_id) as TimesRented
+FROM
+	rental r, inventory i, 
+	film f, film_category fc, 
+	category c
+WHERE
+	r.inventory_id = i.inventory_id
+	AND
+	i.film_id = f.film_id
+	AND
+	f.film_id = fc.film_id
+	AND
+	fc.category_id = c.category_id
+	AND
+	c.name in ("Comedy", "Family", "Sports")
+GROUP BY
+	FilmCategory
+;
