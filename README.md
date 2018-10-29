@@ -8,3 +8,6 @@ The important stuff is the actual SQL queries for now, for beginners like me.
 
 TODO:
 Find/execute examples from "Teach Yourself SQL in 10 Minutes" by Ben Forta
+
+TODO:
+Find practice on https://www.w3schools.com/sql/default.asp
